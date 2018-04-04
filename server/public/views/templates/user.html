@@ -1,0 +1,41 @@
+<div class="navbardiv">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container-fluid">
+     <div class="navbar-header">
+       <a class="navbar-brand" href="#user">Welcome to Chores Check up!</a>
+     </div>
+     <ul class="nav navbar-nav">
+       <li class="active"><a href="#user">Home</a></li>
+       <li><a href="#checklist">My To-Do List</a></li>
+       <li><a href="#userbooklog">Book Log</a></li>
+       <li><a href="#bank">Mom Bank</a></li>
+       <li><a href="#funstuff">Fun Stuff</a></li>
+     </ul>
+     <button class="btn btn-default navbarbutton" ng-click="uc.logout()">Log Out</button>
+   </div>
+  </nav>
+</div>
+<div class="container userbackground">
+    <h2 id="welcome" ><b>Welcome, {{uc.firstname}}! Don't forget to do your chores!</b></h2>
+    <div id="piechart">
+      <canvas id="pie" class="chart chart-pie" chart-data="uc.data"
+              chart-labels="uc.labels" chart-options="optionsPie"
+               chart-colors="uc.colorsPie"
+               chart-click="uc.clickme" chart-hover="uc.hoverme"
+               chart-dataset-override="uc.PieDataSetOverride">
+      </canvas>
+    </div>
+      <div id="calendar">
+        <iframe ng-src="{{uc.calendar}}" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+    <!-- <div id="allowancebar">
+        <h3><b>Allowance Earned:</b></h3>
+      <div class="progress">
+      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-
+      valuenow="70" aria-valuemin="0" aria-valuemax="100" style="{{uc.progressPercent}}">
+        <h3>{{uc.valuenow | currency}}</h3>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

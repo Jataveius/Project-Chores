@@ -1,0 +1,75 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+ <div class="container-fluid">
+   <div class="navbar-header">
+     <a class="navbar-brand" href="#admin">Welcome to Chores Check Up!</a>
+   </div>
+   <ul class="nav navbar-nav">
+     <li><a href="#admin">Admin Home</a></li>
+     <li><a href="#adminbank">Mom Bank</a></li>
+     <li class="active"><a href="#adminbonusrewards">Bonus Rewards</a></li>
+   </ul>
+   <button class="btn btn-default navbarbutton" ng-click="brc.logout()">Log Out</button>
+ </div>
+</nav>
+<!-- book table -->
+<div style="margin-top: 12vh;">
+  <h2 style="margin-left: 30vw;">Approve rewards for reading</h2>
+  <table id="checklisttable">
+    <tr>
+       <th>Date</th>
+       <th>Username</th>
+       <th>Book Title</th>
+       <th>Author</th>
+       <th>Pages</th>
+       <th>Lexile Level</th>
+       <th>Summary</th>
+       <th>Mom Approved Reward ($)</th>
+       <th></th>
+    </tr>
+    <tr ng-repeat="book in brc.books.list">
+      <td>{{ book.date | date:'MM-dd-yyyy' }}</td>
+      <td>{{ book.username }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.pages }}</td>
+      <td>{{ book.level }}</td>
+      <td>{{ book.summary }}</td>
+      <td>{{ book.momapproved }}</td>
+      <td><span ng-if="book.momapproved === 'Waiting Approval'"><button type="button" class="btn btn-default btn-primary" ng-click="brc.addReward(book)">Approve</button></span></td>
+    </tr>
+  </table>
+</div>
+<!-- add book modal-->
+<div class="add-reward-modal container">
+  <script type="text/ng-template" id="addRewardModalContent.html">
+    <div class="modal-header">
+      <img src="/views/images/books.png" class="icons"><h3>Approve a reward for:  {{armic.username}}</h3>
+    </div>
+    <div class="modal-body col-xs-12">
+      <div class="col-xs-8">
+        <input ng-model="armic.title" class="form-control" ng-readonly="true" ng-value="{{armic.title}}"></input>
+      </div>
+      <div class="col-xs-8">
+          <input ng-model="armic.pages" class="form-control" ng-readonly="true"ng-value="'{{armic.pages}}'+' pages'"></input>
+      </div>
+      <div class="col-xs-8">
+      <input ng-model="armic.level" class="form-control" ng-readonly="true" ng-value="'{{armic.level}}'+' level'"></input>
+      </div>
+      <div class="col-xs-8">
+        <input type="number" min=0 ng-model="armic.reward" placeholder="Enter a reward" class="modal-inputs form-control col-xs-8">
+      </div>
+      <div class="col-xs-8">
+        <label class="col-xs-2">Date: </label>
+          <input class="form-control col-xs-4" type="date" name="datepicker" ng-model="armic.date" ></input>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-success" ng-click="armic.addReward()" >
+        Save
+      </button>
+      <button type="button" class="btn btn-default btn-danger" ng-click="armic.cancel()">
+        Cancel
+      </button>
+    </div>
+  </script>
+</div>
